@@ -6,4 +6,6 @@
     <string name="title_favorite_recipes">Favorite</string>
     <string name="title_food_joke">Joke</string>
 
+    <string name="hint_no_internet">No Internet Connection</string>
+
 </resources>

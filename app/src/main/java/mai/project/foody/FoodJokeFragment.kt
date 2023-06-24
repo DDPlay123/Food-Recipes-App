@@ -1,18 +1,12 @@
 package mai.project.foody
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import mai.project.foody.databinding.FragmentFoodJokeBinding
 
-class FoodJokeFragment : Fragment() {
+class FoodJokeFragment : BaseFragment<FragmentFoodJokeBinding>(R.layout.fragment_food_joke) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_joke, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }
