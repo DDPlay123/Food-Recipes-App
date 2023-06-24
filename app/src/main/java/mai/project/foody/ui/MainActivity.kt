@@ -1,4 +1,4 @@
-package mai.project.foody
+package mai.project.foody.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import mai.project.foody.R
 import mai.project.foody.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
