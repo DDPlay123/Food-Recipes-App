@@ -33,11 +33,11 @@ android {
         dataBinding = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -65,10 +65,6 @@ dependencies {
     kapt("androidx.room:room-compiler:$versionRoom")
     implementation("androidx.room:room-ktx:$versionRoom")
     androidTestImplementation("androidx.room:room-testing:$versionRoom")
-
-    // Data Binding
-    kapt("com.android.databinding:compiler:3.1.4")
-    kapt("androidx.databinding:databinding-common:8.0.2")
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.3.0")
@@ -102,9 +98,9 @@ dependencies {
     // Gson
     implementation("com.google.code.gson:gson:2.9.0")
 
-    // Shimmer (https://github.com/facebook/shimmer-android)
+    // Shimmer (https://github.com/omtodkar/ShimmerRecyclerView)
     implementation("com.facebook.shimmer:shimmer:0.5.0")
-    implementation("com,todkars:shimmer-recyclerview:0.4.0")
+    implementation("com.todkars:shimmer-recyclerview:0.4.1")
 
     // Jsoup
     implementation("org.jsoup:jsoup:1.14.3")
