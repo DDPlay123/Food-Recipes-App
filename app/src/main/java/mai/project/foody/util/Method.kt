@@ -7,9 +7,9 @@ object Method {
     /**
      * Logcat
      */
-    fun logE(tag: String, message: String) {
+    fun logE(tag: String, message: String, tr: Throwable? = null) {
         if (BuildConfig.DEBUG)
-            Log.e(tag, message)
+            Log.e(tag, message, tr)
     }
 
     fun logD(tag: String, message: String) {

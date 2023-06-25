@@ -11,10 +11,10 @@ class RecipesViewModel @Inject constructor(
 
     fun applyQueries(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
-        queries[Constants.QUERY_NUMBER] = "50"
+        queries[Constants.QUERY_NUMBER] = Constants.DEFAULT_RECIPES_NUMBER
         queries[Constants.QUERY_API_KEY] = Constants.API_KEY
-        queries[Constants.QUERY_TYPE] = "main course"
-        queries[Constants.QUERY_DIET] = "gluten free"
+        queries[Constants.QUERY_TYPE] = Constants.DEFAULT_MEAL_TYPE
+        queries[Constants.QUERY_DIET] = Constants.DEFAULT_DIET_TYPE
         queries[Constants.QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[Constants.QUERY_FILL_INGREDIENTS] = "true"
         return queries

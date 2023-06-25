@@ -75,6 +75,9 @@ dependencies {
     implementation("androidx.room:room-ktx:$versionRoom")
     androidTestImplementation("androidx.room:room-testing:$versionRoom")
 
+    // DataStore Components
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     // Retorfit
     val versionRetrofit = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$versionRetrofit")
