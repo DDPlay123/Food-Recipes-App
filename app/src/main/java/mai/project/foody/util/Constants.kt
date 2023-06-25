@@ -1,4 +1,6 @@
-package mai.project.foody
+package mai.project.foody.util
+
+import mai.project.foody.BuildConfig
 
 class Constants {
     companion object {

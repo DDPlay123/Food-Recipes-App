@@ -117,3 +117,8 @@ dependencies {
     // Jsoup
     implementation("org.jsoup:jsoup:1.14.3")
 }
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
+}
