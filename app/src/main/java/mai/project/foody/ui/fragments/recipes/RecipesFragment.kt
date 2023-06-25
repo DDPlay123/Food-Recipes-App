@@ -3,9 +3,13 @@ package mai.project.foody.ui.fragments.recipes
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import mai.project.foody.viewmodels.MainViewModel
 import mai.project.foody.R
 import mai.project.foody.adapters.RecipesAdapter
@@ -35,7 +39,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
     private fun doInitialize() {
         setupRecyclerView()
-        requestAPIData()
+        readDatabase()
     }
 
     private fun setupRecyclerView() {
@@ -43,6 +47,23 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
             adapter = recipesAdapter
             layoutManager = LinearLayoutManager(requireContext())
             showShimmer()
+        }
+    }
+
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                launch {
+                    mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+                        if (database.isNotEmpty()) {
+                            recipesAdapter.setData(database[0].foodRecipe)
+                            binding.rvShimmer.hideShimmer()
+                        } else {
+                            requestAPIData()
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -57,12 +78,21 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
                 is NetworkResult.Error -> {
                     binding.rvShimmer.hideShimmer()
+                    loadDataFromCache()
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                 }
 
                 is NetworkResult.Loading -> {
                     binding.rvShimmer.showShimmer()
                 }
+            }
+        }
+    }
+
+    private fun loadDataFromCache() {
+        mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+            if (database.isNotEmpty()) {
+                recipesAdapter.setData(database[0].foodRecipe)
             }
         }
     }
