@@ -27,9 +27,14 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     private lateinit var recipesViewModel: RecipesViewModel
     private val recipesAdapter by lazy { RecipesAdapter() }
 
-    override fun FragmentRecipesBinding.initialize() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
+    }
+
+    override fun FragmentRecipesBinding.initialize() {
+        binding.mainViewModel = this@RecipesFragment.mainViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
