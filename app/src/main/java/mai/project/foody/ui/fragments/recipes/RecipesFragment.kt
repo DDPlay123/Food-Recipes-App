@@ -15,8 +15,9 @@ import mai.project.foody.R
 import mai.project.foody.adapters.RecipesAdapter
 import mai.project.foody.databinding.FragmentRecipesBinding
 import mai.project.foody.ui.fragments.BaseFragment
-import mai.project.foody.util.Constants
+import mai.project.foody.util.Method
 import mai.project.foody.util.NetworkResult
+import mai.project.foody.util.observeOnce
 import mai.project.foody.viewmodels.RecipesViewModel
 
 @AndroidEntryPoint
@@ -54,8 +55,10 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 launch {
-                    mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+                    // 這裡用 observeOnce() 是要避免呼叫API後，畫面重整時，又重新讀取資料庫的資料
+                    mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                         if (database.isNotEmpty()) {
+                            Method.logE("RecipesFragment", "readDatabase called.")
                             recipesAdapter.setData(database[0].foodRecipe)
                             binding.rvShimmer.hideShimmer()
                         } else {
@@ -68,6 +71,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     }
 
     private fun requestAPIData() {
+        Method.logE("RecipesFragment", "requestAPIData called.")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -92,6 +96,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     private fun loadDataFromCache() {
         mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
             if (database.isNotEmpty()) {
+                Method.logE("RecipesFragment", "loadDataFromCache called.")
                 recipesAdapter.setData(database[0].foodRecipe)
             }
         }
