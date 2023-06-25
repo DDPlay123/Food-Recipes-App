@@ -1,9 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FoodRecipesApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.FoodRecipesApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.FoodRecipesApp" parent="Base.Theme.FoodRecipesApp" />
+
+    <style name="MyBottomSheetDialogStyle" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowTranslucentStatus">true</item><!-- 全屏狀態欄變黑 -->
+        <item name="android:backgroundDimEnabled">true</item>   <!-- 是否允許背景模糊 -->
+        <item name="android:windowIsTranslucent">true</item>    <!-- 是否半透明 -->
+        <item name="android:windowIsFloating">true</item>       <!-- 懸浮在Activity上 -->
+        <item name="android:windowContentOverlay">@null</item>  <!-- 是否有遮蓋 -->
+        <item name="android:backgroundDimAmount">0.5</item>     <!-- 背景模糊的透明度-->
+    </style>
+
+    <style name="MyChipStyle" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconTint">@color/chip_text_color</item>
+    </style>
 </resources>

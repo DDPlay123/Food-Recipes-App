@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -41,11 +42,20 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         super.onViewCreated(view, savedInstanceState)
 
         doInitialize()
+        setListener()
     }
 
     private fun doInitialize() {
         setupRecyclerView()
         readDatabase()
+    }
+
+    private fun setListener() {
+        binding.apply {
+            fabRecipes.setOnClickListener {
+                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
