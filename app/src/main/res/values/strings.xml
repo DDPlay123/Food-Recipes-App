@@ -12,5 +12,37 @@
     <string name="hint_no_recipes">Recipes not found</string>
 
     <string name="text_vegan">Vegan</string>
+    <string name="text_meal_type">Meal Type</string>
+    <string name="text_diet_type">Diet Type</string>
+    <string name="text_apply">Apply</string>
+
+    <!--  Meal Type  -->
+    <string name="chip_main_course">Main Course</string>
+    <string name="chip_bread">Bread</string>
+    <string name="chip_marinade">Marinade</string>
+    <string name="chip_side_dish">Side Dish</string>
+    <string name="chip_break_fast">Breakfast</string>
+    <string name="chip_finger_food">Finger Food</string>
+    <string name="chip_dessert">Dessert</string>
+    <string name="chip_soup">Soup</string>
+    <string name="chip_snack">Snack</string>
+    <string name="chip_appetizer">Appetizer</string>
+    <string name="chip_beverage">Beverage</string>
+    <string name="chip_drink">Drink</string>
+    <string name="chip_salad">Salad</string>
+    <string name="chip_sauce">Sauce</string>
+
+    <!--  Diet Type  -->
+    <string name="chip_gluten_free">Gluten Free</string>
+    <string name="chip_ketogenic">Ketogenic</string>
+    <string name="chip_vegetarian">Vegetarian</string>
+    <string name="chip_lacto_vegetarian">Lacto-Vegetarian</string>
+    <string name="chip_ovo_vegetarian">Ovo-Vegetarian</string>
+    <string name="chip_vegan">Vegan</string>
+    <string name="chip_pescetarian">Pescetarian</string>
+    <string name="chip_paleo">Paleo</string>
+    <string name="chip_primal">Primal</string>
+    <string name="chip_low_fodmap">Low FODMAP</string>
+    <string name="chip_whole30">Whole30</string>
 
 </resources>
