@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,8 +25,11 @@ import mai.project.foody.viewmodels.RecipesViewModel
 @AndroidEntryPoint
 class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_recipes) {
 
+    private val args by navArgs<RecipesFragmentArgs>()
+
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
+
     private val recipesAdapter by lazy { RecipesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +76,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                 launch {
                     // 這裡用 observeOnce() 是要避免呼叫API後，畫面重整時，又重新讀取資料庫的資料
                     mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                        if (database.isNotEmpty()) {
+                        if (database.isNotEmpty() && !args.backFromBottomSheet) {
                             Method.logE("RecipesFragment", "readDatabase called.")
                             recipesAdapter.setData(database[0].foodRecipe)
                             binding.rvShimmer.hideShimmer()

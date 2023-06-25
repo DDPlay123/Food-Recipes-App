@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.launch
@@ -77,7 +78,10 @@ class RecipesBottomSheet : BaseBottomSheetDialogFragment<RecipesBottomSheetBindi
                     mealTypeChipId,
                     dietTypeChip,
                     dietTypeChipId
-                ).run { dismiss() }
+                )
+                val action = RecipesBottomSheetDirections
+                    .actionRecipesBottomSheetToRecipesFragment(true)
+                findNavController().navigate(action)
             }
         }
     }
