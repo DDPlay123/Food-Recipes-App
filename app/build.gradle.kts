@@ -63,9 +63,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // CoordinatorLayout
-    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-
     // Navigation Component
     val versionNavigation = "2.6.0"
     implementation("androidx.navigation:navigation-fragment-ktx:$versionNavigation")
@@ -78,9 +75,6 @@ dependencies {
     implementation("androidx.room:room-ktx:$versionRoom")
     androidTestImplementation("androidx.room:room-testing:$versionRoom")
 
-    // RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.0")
-
     // Retorfit
     val versionRetrofit = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$versionRetrofit")
@@ -91,10 +85,6 @@ dependencies {
     val versionHilt = "2.46.1"
     implementation("com.google.dagger:hilt-android:$versionHilt")
     kapt("com.google.dagger:hilt-android-compiler:$versionHilt")
-
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
