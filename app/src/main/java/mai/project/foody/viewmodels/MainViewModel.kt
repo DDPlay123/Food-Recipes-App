@@ -1,15 +1,17 @@
-package mai.project.foody
+package mai.project.foody.viewmodels
 
 import android.app.Application
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import mai.project.foody.R
 import mai.project.foody.data.Repository
-import mai.project.foody.data.network.NetworkResult
+import mai.project.foody.util.NetworkResult
 import mai.project.foody.models.FoodRecipe
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,24 +22,28 @@ class MainViewModel @Inject constructor(
     application: Application
 ): AndroidViewModel(application) {
 
-    var recipesResponse: MediatorLiveData<NetworkResult<FoodRecipe>> = MediatorLiveData()
+    private val _recipesResponse: MediatorLiveData<NetworkResult<FoodRecipe>> = MediatorLiveData()
+    val recipesResponse: LiveData<NetworkResult<FoodRecipe>>
+        get() = _recipesResponse
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
     }
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
-        recipesResponse.value = NetworkResult.Loading()
+        _recipesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
             try {
                 val response = repository.remote.getRecipes(queries)
-                recipesResponse.value = handleFoodRecipesResponse(response)
+                _recipesResponse.value = handleFoodRecipesResponse(response)
             } catch (e: Exception) {
                 e.printStackTrace()
-                recipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(R.string.hint_no_recipes))
+                _recipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(
+                    R.string.hint_no_recipes
+                ))
             }
         } else {
-            recipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(R.string.hint_no_internet))
+            _recipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(R.string.hint_no_internet))
         }
     }
 

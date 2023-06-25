@@ -1,4 +1,4 @@
-package mai.project.foody.data.network
+package mai.project.foody.util
 
 sealed class NetworkResult<T>(
     val data: T? = null,

@@ -11,4 +11,6 @@
     <string name="hint_api_key_limit">API Key limited</string>
     <string name="hint_no_recipes">Recipes not found</string>
 
+    <string name="text_vegan">Vegan</string>
+
 </resources>

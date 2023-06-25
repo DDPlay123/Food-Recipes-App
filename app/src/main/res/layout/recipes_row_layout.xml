@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="result"
+            type="mai.project.foody.models.Result" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +20,6 @@
             android:id="@+id/rowCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +35,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgRecipe"
+                    loadImageFromUrl="@{result.image}"
                     android:layout_width="200dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -49,7 +52,9 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:ellipsize="end"
+                    android:fontFamily="@font/courgette"
                     android:maxLines="2"
+                    android:text="@{result.title}"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -66,6 +71,8 @@
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
+                    android:text="@{result.summary}"
+                    android:textColor="@color/darkGray"
                     app:layout_constraintEnd_toEndOf="@+id/tvTitle"
                     app:layout_constraintStart_toStartOf="@+id/tvTitle"
                     app:layout_constraintTop_toBottomOf="@+id/tvTitle"
@@ -78,9 +85,8 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/tvHeart"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/tvHeart"
+                    app:layout_constraintStart_toStartOf="@+id/tvDescription"
                     app:layout_constraintTop_toBottomOf="@+id/tvDescription"
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/baseline_favorite_24"
@@ -88,11 +94,13 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvHeart"
+                    setNumberOfLikes="@{result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/red"
-                    app:layout_constraintStart_toStartOf="@+id/tvDescription"
+                    app:layout_constraintEnd_toEndOf="@+id/imgHeart"
+                    app:layout_constraintStart_toStartOf="@+id/imgHeart"
                     app:layout_constraintTop_toBottomOf="@+id/imgHeart"
                     tools:text="100" />
 
@@ -100,41 +108,46 @@
                     android:id="@+id/imgClock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@+id/tvClock"
-                    app:layout_constraintStart_toStartOf="@+id/tvClock"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toEndOf="@+id/imgHeart"
                     app:layout_constraintTop_toTopOf="@+id/imgHeart"
                     app:srcCompat="@drawable/baseline_access_time_24"
                     app:tint="@color/yellow" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvClock"
+                    setNumberOfMinutes="@{result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
-                    app:layout_constraintStart_toEndOf="@+id/tvHeart"
+                    app:layout_constraintEnd_toEndOf="@+id/imgClock"
+                    app:layout_constraintStart_toStartOf="@+id/imgClock"
                     app:layout_constraintTop_toBottomOf="@+id/imgClock"
                     tools:text="100" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgLeaf"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@+id/tvLeaf"
-                    app:layout_constraintStart_toStartOf="@+id/tvLeaf"
+                    android:layout_marginStart="28dp"
+                    android:tint="@color/darkGray"
+                    app:layout_constraintStart_toEndOf="@+id/tvClock"
                     app:layout_constraintTop_toTopOf="@+id/imgClock"
                     app:srcCompat="@drawable/baseline_eco_24" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvLeaf"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:text="@string/text_vegan"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/tvClock"
-                    app:layout_constraintTop_toBottomOf="@+id/imgLeaf"
-                    tools:text="100" />
+                    android:textColor="@color/darkGray"
+                    app:layout_constraintEnd_toEndOf="@+id/imgLeaf"
+                    app:layout_constraintStart_toStartOf="@+id/imgLeaf"
+                    app:layout_constraintTop_toBottomOf="@+id/imgLeaf" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

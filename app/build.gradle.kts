@@ -85,14 +85,12 @@ dependencies {
     val versionRetrofit = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$versionRetrofit")
     implementation("com.squareup.retrofit2:converter-gson:$versionRetrofit")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.8.0") // 用於攔截API
 
     // Dagger - Hilt
     val versionHilt = "2.46.1"
     implementation("com.google.dagger:hilt-android:$versionHilt")
     kapt("com.google.dagger:hilt-android-compiler:$versionHilt")
-
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
