@@ -5,6 +5,9 @@
     <string name="title_recipes">Recipes</string>
     <string name="title_favorite_recipes">Favorite</string>
     <string name="title_food_joke">Joke</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="title_instructions">Instructions</string>
 
     <string name="hint_no_internet">No internet connection</string>
     <string name="hint_timeout">Timeout</string>
