@@ -1,8 +1,15 @@
 package mai.project.foody.ui.fragments.recipes
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -25,7 +32,9 @@ import mai.project.foody.util.observeOnce
 import mai.project.foody.viewmodels.RecipesViewModel
 
 @AndroidEntryPoint
-class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_recipes) {
+class RecipesFragment :
+    BaseFragment<FragmentRecipesBinding>(R.layout.fragment_recipes),
+    SearchView.OnQueryTextListener{
 
     private val args by navArgs<RecipesFragmentArgs>()
 
@@ -37,12 +46,39 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Setup ViewModel
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
     }
 
     override fun FragmentRecipesBinding.initialize() {
         binding.mainViewModel = this@RecipesFragment.mainViewModel
+
+        // Set the Toolbar as the ActionBar
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolBar)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.recipes_menu, menu)
+
+                val search = menu.findItem(R.id.menu_search)
+                val searchView = search.actionView as? SearchView
+                searchView?.isSubmitButtonEnabled = true
+                searchView?.setOnQueryTextListener(this@RecipesFragment)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
