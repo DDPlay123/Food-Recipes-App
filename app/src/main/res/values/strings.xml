@@ -16,6 +16,7 @@
     <string name="text_diet_type">Diet Type</string>
     <string name="text_apply">Apply</string>
     <string name="text_search">Search</string>
+    <string name="text_detail">Detail</string>
 
     <!--  Meal Type  -->
     <string name="chip_main_course">Main Course</string>
