@@ -39,8 +39,16 @@ class MainViewModel @Inject constructor(
     val recipesResponse: LiveData<NetworkResult<FoodRecipe>>
         get() = _recipesResponse
 
+    private val _searchRecipesResponse: MediatorLiveData<NetworkResult<FoodRecipe>> = MediatorLiveData()
+    val searchRecipesResponse: LiveData<NetworkResult<FoodRecipe>>
+        get() = _searchRecipesResponse
+
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
+    }
+
+    fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
+        searchRecipesSafeCall(searchQuery)
     }
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
@@ -61,6 +69,23 @@ class MainViewModel @Inject constructor(
             }
         } else {
             _recipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(R.string.hint_no_internet))
+        }
+    }
+
+    private suspend fun searchRecipesSafeCall(searchQuery: Map<String, String>) {
+        _searchRecipesResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.searchRecipes(searchQuery)
+                _searchRecipesResponse.value = handleFoodRecipesResponse(response)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _searchRecipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(
+                    R.string.hint_no_recipes
+                ))
+            }
+        } else {
+            _searchRecipesResponse.value = NetworkResult.Error(getApplication<Application>().getString(R.string.hint_no_internet))
         }
     }
 

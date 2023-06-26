@@ -74,11 +74,19 @@ class RecipesFragment :
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        query?.let {
+            searchAPIData(it)
+        }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         return true
+    }
+
+    private fun searchAPIData(searchQuery: String) {
+        binding.rvShimmer.showShimmer()
+        mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,7 +123,7 @@ class RecipesFragment :
     private fun doObserve() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                // readDatabase
+                // readDatabase or requestAPIData
                 launch {
                     // 這裡用 observeOnce() 是要避免呼叫API後，畫面重整時，又重新讀取資料庫的資料
                     mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
@@ -125,6 +133,29 @@ class RecipesFragment :
                             binding.rvShimmer.hideShimmer()
                         } else {
                             requestAPIData()
+                        }
+                    }
+                }
+                // Search API
+                launch {
+                    mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner) { response ->
+                        when (response) {
+                            is NetworkResult.Success -> {
+                                binding.rvShimmer.hideShimmer()
+                                response.data?.let { recipesAdapter.setData(it) }
+                            }
+
+                            is NetworkResult.Error -> {
+                                binding.rvShimmer.hideShimmer()
+                                loadDataFromCache()
+                                Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                            }
+
+                            is NetworkResult.Loading -> {
+                                binding.rvShimmer.showShimmer()
+                            }
+
+                            else -> Unit
                         }
                     }
                 }
@@ -166,6 +197,8 @@ class RecipesFragment :
                 is NetworkResult.Loading -> {
                     binding.rvShimmer.showShimmer()
                 }
+
+                else -> Unit
             }
         }
     }
