@@ -9,6 +9,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mai.project.foody.R
 import mai.project.foody.data.Repository
@@ -25,11 +26,11 @@ class MainViewModel @Inject constructor(
 ): AndroidViewModel(application) {
 
     /** ROOM DATABASE */
-    val readRecipes: LiveData<List<RecipesEntity>>
-        get() = repository.local.readDatabase().asLiveData()
+    val readRecipes: LiveData<List<RecipesEntity>> =
+        repository.local.readDatabase().asLiveData() // 如果使用get()，UI會持續監聽不間斷。
 
     private fun insertRecipes(recipesEntity: RecipesEntity) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
         }
 
