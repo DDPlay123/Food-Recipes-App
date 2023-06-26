@@ -21,12 +21,19 @@ class RecipesViewModel @Inject constructor(
     private var dietType = Constants.DEFAULT_DIET_TYPE
 
     var networkStatus = false
+    var backOnline = false
 
     val readMealAndDietType = dataStoreRepository.readMealAndDietType
+    val readBackOnline = dataStoreRepository.readBackOnline
 
     fun saveMealAndDietType(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) =
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveMealAndDietType(mealType, mealTypeId, dietType, dietTypeId)
+        }
+
+    fun saveBackOnline(backOnline: Boolean) =
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.saveBackOnline(backOnline)
         }
 
     fun applyQueries(): HashMap<String, String> {
@@ -52,6 +59,12 @@ class RecipesViewModel @Inject constructor(
     fun showNetworkStatus() {
         if (!networkStatus) {
             Toast.makeText(getApplication(), "No internet connection.", Toast.LENGTH_SHORT).show()
+            saveBackOnline(true)
+        } else if (networkStatus) {
+            if (backOnline) {
+                Toast.makeText(getApplication(), "We're back online.", Toast.LENGTH_SHORT).show()
+                saveBackOnline(false)
+            }
         }
     }
 }

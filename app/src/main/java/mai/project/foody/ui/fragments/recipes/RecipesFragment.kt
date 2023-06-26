@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -53,7 +54,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
     private fun doInitialize() {
         setupRecyclerView()
-        readDatabase()
+        doObserve()
     }
 
     private fun setListener() {
@@ -75,9 +76,10 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         }
     }
 
-    private fun readDatabase() {
+    private fun doObserve() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
+                // readDatabase
                 launch {
                     // 這裡用 observeOnce() 是要避免呼叫API後，畫面重整時，又重新讀取資料庫的資料
                     mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
@@ -90,12 +92,20 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                         }
                     }
                 }
+                // checkNetworkAvailability
                 launch {
                     networkListener.checkNetworkAvailability(requireContext())
                         .collect { status ->
+                            Method.logE("RecipesFragment", "Network: $status")
                             recipesViewModel.networkStatus = status
                             recipesViewModel.showNetworkStatus()
                         }
+                }
+                // checkBackOnline
+                launch {
+                    recipesViewModel.readBackOnline.asLiveData().observe(viewLifecycleOwner) { backOnline ->
+                        recipesViewModel.backOnline = backOnline
+                    }
                 }
             }
         }

@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
+import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_BackOnline
 import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_DIET_TYPE
 import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_DIET_TYPE_ID
 import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_MEAL_TYPE
@@ -48,6 +49,7 @@ class DataStoreRepository @Inject constructor(
         const val Preferences_MEAL_TYPE_ID = "mealTypeId"
         const val Preferences_DIET_TYPE = "dietType"
         const val Preferences_DIET_TYPE_ID = "dietTypeId"
+        const val Preferences_BackOnline = "backOnline"
     }
 
     // Build DataStore
@@ -85,6 +87,20 @@ class DataStoreRepository @Inject constructor(
         putData(Preferences_MEAL_TYPE_ID, mealTypeId)
         putData(Preferences_DIET_TYPE, dietType)
         putData(Preferences_DIET_TYPE_ID, dietTypeId)
+    }
+
+    val readBackOnline: Flow<Boolean> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                Method.logE("DataStore", "Error getBackOnline", exception)
+                emit(emptyPreferences())
+            } else throw exception
+        }.map {
+            it[booleanPreferencesKey(Preferences_BackOnline)] ?: false
+        }
+
+    suspend fun saveBackOnline(backOnline: Boolean) {
+        putData(Preferences_BackOnline, backOnline)
     }
 
     // PUT Any Data
