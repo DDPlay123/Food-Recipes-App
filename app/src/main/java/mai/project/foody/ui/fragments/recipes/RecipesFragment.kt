@@ -18,6 +18,7 @@ import mai.project.foody.adapters.RecipesAdapter
 import mai.project.foody.databinding.FragmentRecipesBinding
 import mai.project.foody.ui.fragments.BaseFragment
 import mai.project.foody.util.Method
+import mai.project.foody.util.NetworkListener
 import mai.project.foody.util.NetworkResult
 import mai.project.foody.util.observeOnce
 import mai.project.foody.viewmodels.RecipesViewModel
@@ -31,6 +32,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     private lateinit var recipesViewModel: RecipesViewModel
 
     private val recipesAdapter by lazy { RecipesAdapter() }
+    private val networkListener by lazy { NetworkListener() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +59,10 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     private fun setListener() {
         binding.apply {
             fabRecipes.setOnClickListener {
-                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                if (recipesViewModel.networkStatus)
+                    findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                else
+                    recipesViewModel.showNetworkStatus()
             }
         }
     }
@@ -84,6 +89,13 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                             requestAPIData()
                         }
                     }
+                }
+                launch {
+                    networkListener.checkNetworkAvailability(requireContext())
+                        .collect { status ->
+                            recipesViewModel.networkStatus = status
+                            recipesViewModel.showNetworkStatus()
+                        }
                 }
             }
         }
