@@ -39,8 +39,8 @@
             android:id="@+id/rvShimmer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,8 +79,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvError"
-            readApiResponse2="@{mainViewModel.recipesResponse}"
-            readDatabase2="@{mainViewModel.readRecipes}"
+            readApiResponse="@{mainViewModel.recipesResponse}"
+            readDatabase="@{mainViewModel.readRecipes}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

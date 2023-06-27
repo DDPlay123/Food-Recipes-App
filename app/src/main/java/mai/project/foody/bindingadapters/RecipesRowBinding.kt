@@ -31,15 +31,6 @@ class RecipesRowBinding {
             }
         }
 
-        @BindingAdapter("loadImageFromUrl")
-        @JvmStatic
-        fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
-            imageView.load(imageUrl) {
-                crossfade(600)
-                error(R.drawable.error_placeholder)
-            }
-        }
-
         @BindingAdapter("setNumberOfLikes")
         @JvmStatic
         fun setNumberOfLikes(textView: TextView, likes: Int) {

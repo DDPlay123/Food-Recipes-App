@@ -1,19 +1,25 @@
 package mai.project.foody.ui.fragments.overview
 
 import android.os.Bundle
-import android.view.View
 import mai.project.foody.R
 import mai.project.foody.databinding.FragmentOverviewBinding
+import mai.project.foody.models.Result
 import mai.project.foody.ui.fragments.BaseFragment
+import mai.project.foody.util.parcelable
 
 class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment_overview) {
 
-    override fun FragmentOverviewBinding.initialize() {
+    private var argBundle: Result? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        argBundle = arguments?.parcelable("recipeBundle") as Result?
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun FragmentOverviewBinding.initialize() {
+        if (argBundle == null) return
+        // Setup data
+        binding.result = argBundle
     }
 }
