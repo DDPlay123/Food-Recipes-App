@@ -15,6 +15,7 @@
     <string name="hint_no_recipes">Recipes not found</string>
     <string name="hint_recipe_saved">Recipe saved</string>
     <string name="hint_removed_from_favorites">Removed from Favorites</string>
+    <string name="hint_no_favorite_recipes">No Favorite Recipes</string>
 
     <string name="text_vegan">Vegan</string>
     <string name="text_meal_type">Meal Type</string>

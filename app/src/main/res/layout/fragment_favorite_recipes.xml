@@ -13,16 +13,63 @@
         android:background="@color/lightGray"
         tools:context=".ui.fragments.favorites.FavoriteRecipesFragment">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:elevation="4dp"
-            app:title="@string/title_favorite_recipes"
-            app:titleTextColor="@color/black"
-            android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:elevation="4dp"
+                app:title="@string/title_favorite_recipes"
+                app:titleTextColor="@color/colorPrimary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoriteRecipesRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgNoData"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:alpha="0.5"
+            android:src="@drawable/baseline_menu_book_24"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/tvNoData"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.5"
+            android:text="@string/hint_no_favorite_recipes"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imgNoData"
+            app:layout_constraintStart_toStartOf="@+id/imgNoData"
+            app:layout_constraintTop_toBottomOf="@+id/imgNoData" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
