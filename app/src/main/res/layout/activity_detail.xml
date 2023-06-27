@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?android:attr/actionBarSize"
+                app:menu="@menu/details_menu"
                 app:title="@string/text_detail"
                 app:titleTextColor="@color/colorPrimary" />
 

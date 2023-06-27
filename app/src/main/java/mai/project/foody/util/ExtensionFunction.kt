@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
+import mai.project.foody.R
 
 fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
     observe(lifecycleOwner, object : Observer<T> {
@@ -15,6 +18,13 @@ fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observ
             observer.onChanged(t)
         }
     })
+}
+
+fun View.showSnackBar(message: String, doSomething: () -> Unit = {}) {
+    Snackbar.make(this, message, Snackbar.LENGTH_SHORT)
+        .setAction(this.context.getString(R.string.text_okay)) {
+            doSomething.invoke()
+        }.show()
 }
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {

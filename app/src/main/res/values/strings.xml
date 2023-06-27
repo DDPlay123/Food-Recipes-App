@@ -13,6 +13,8 @@
     <string name="hint_timeout">Timeout</string>
     <string name="hint_api_key_limit">API Key limited</string>
     <string name="hint_no_recipes">Recipes not found</string>
+    <string name="hint_recipe_saved">Recipe saved</string>
+    <string name="hint_removed_from_favorites">Removed from Favorites</string>
 
     <string name="text_vegan">Vegan</string>
     <string name="text_meal_type">Meal Type</string>
@@ -25,6 +27,8 @@
     <string name="text_dairy_free">Dairy Free</string>
     <string name="text_healthy">Healthy</string>
     <string name="text_cheap">Cheap</string>
+    <string name="text_save_to_favorites">Save to Favorites</string>
+    <string name="text_okay">Okay</string>
 
     <!--  Meal Type  -->
     <string name="chip_main_course">Main Course</string>
