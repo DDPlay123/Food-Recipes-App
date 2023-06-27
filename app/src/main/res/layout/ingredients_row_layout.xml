@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="ingredient"
+            type="mai.project.foody.models.ExtendedIngredient" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,6 +46,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgIngredient"
+                    loadImageFromIngredientImage="@{ingredient.image}"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:layout_constraintBottom_toBottomOf="@+id/whiteBackground"
@@ -53,6 +57,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvIngredientName"
+                    setIngredientName="@{ingredient.name}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -72,6 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:text="@{String.valueOf(ingredient.amount)}"
                     app:layout_constraintStart_toStartOf="@+id/tvIngredientName"
                     app:layout_constraintTop_toBottomOf="@+id/tvIngredientName"
                     tools:text="100" />
@@ -81,6 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{ingredient.unit}"
                     app:layout_constraintBottom_toBottomOf="@+id/tvIngredientAmount"
                     app:layout_constraintStart_toEndOf="@+id/tvIngredientAmount"
                     app:layout_constraintTop_toTopOf="@+id/tvIngredientAmount"
@@ -92,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
+                    android:text="@{ingredient.consistency}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvIngredientAmount"
                     app:layout_constraintTop_toBottomOf="@+id/tvIngredientAmount"
@@ -104,6 +112,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
+                    android:text="@{ingredient.original}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvIngredientConsistency"

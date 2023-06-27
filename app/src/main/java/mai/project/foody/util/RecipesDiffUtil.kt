@@ -1,11 +1,10 @@
 package mai.project.foody.util
 
 import androidx.recyclerview.widget.DiffUtil
-import mai.project.foody.models.Result
 
-class RecipesDiffUtil(
-    private val oldList: List<Result>,
-    private val newList: List<Result>
+class RecipesDiffUtil<T>(
+    private val oldList: List<T>,
+    private val newList: List<T>
 ): DiffUtil.Callback() {
 
     // 返回舊列表的大小。
