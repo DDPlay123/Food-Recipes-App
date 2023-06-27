@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/strokeColor"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardBackgroundColor"
+                android:elevation="2dp">
+
+                <View
+                    android:id="@+id/whiteBackground"
+                    android:layout_width="120dp"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgIngredient"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/whiteBackground"
+                    app:layout_constraintEnd_toEndOf="@+id/whiteBackground"
+                    app:layout_constraintStart_toStartOf="@+id/whiteBackground"
+                    app:layout_constraintTop_toTopOf="@+id/whiteBackground"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvIngredientName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/courgette"
+                    android:textColor="@color/titleColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/whiteBackground"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Name" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvIngredientAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvIngredientName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvIngredientName"
+                    tools:text="100" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvIngredientUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvIngredientAmount"
+                    app:layout_constraintStart_toEndOf="@+id/tvIngredientAmount"
+                    app:layout_constraintTop_toTopOf="@+id/tvIngredientAmount"
+                    tools:text="Grams" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvIngredientConsistency"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvIngredientAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/tvIngredientAmount"
+                    tools:text="Consistency" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvIngredientOriginal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvIngredientConsistency"
+                    app:layout_constraintTop_toBottomOf="@+id/tvIngredientConsistency"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Original" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
