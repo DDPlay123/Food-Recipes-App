@@ -14,6 +14,7 @@ import mai.project.foody.databinding.ActivityDetailBinding
 import mai.project.foody.ui.fragments.ingredients.IngredientsFragment
 import mai.project.foody.ui.fragments.instructions.InstructionsFragment
 import mai.project.foody.ui.fragments.overview.OverviewFragment
+import mai.project.foody.util.Constants
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
@@ -57,7 +58,7 @@ class DetailActivity : AppCompatActivity() {
             titles.add(getString(R.string.title_instructions))
 
             val resultBundle = Bundle()
-            resultBundle.putParcelable("recipeBundle", args.result)
+            resultBundle.putParcelable(Constants.RECIPE_RESULT_KEY, args.result)
 
             val adapter = Pager2Adapter(
                 fragments,

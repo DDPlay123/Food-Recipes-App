@@ -5,6 +5,7 @@ import mai.project.foody.R
 import mai.project.foody.databinding.FragmentOverviewBinding
 import mai.project.foody.models.Result
 import mai.project.foody.ui.fragments.BaseFragment
+import mai.project.foody.util.Constants
 import mai.project.foody.util.parcelable
 
 class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment_overview) {
@@ -14,7 +15,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        argBundle = arguments?.parcelable("recipeBundle") as Result?
+        argBundle = arguments?.parcelable(Constants.RECIPE_RESULT_KEY) as Result?
     }
 
     override fun FragmentOverviewBinding.initialize() {
