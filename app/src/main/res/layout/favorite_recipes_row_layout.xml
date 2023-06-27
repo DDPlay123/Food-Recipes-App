@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="result"
-            type="mai.project.foody.models.Result" />
+            name="favoritesEntity"
+            type="mai.project.foody.data.database.entites.FavoritesEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        onRecipeClickListener="@{result}"
+        onRecipeClickListener="@{favoritesEntity.result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -33,8 +34,8 @@
                 android:background="@color/white">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imgRecipe"
-                    loadImageFromUrl="@{result.image}"
+                    android:id="@+id/imgFavoriteRecipe"
+                    loadImageFromUrl="@{favoritesEntity.result.image}"
                     android:layout_width="200dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -44,7 +45,7 @@
                     tools:src="@tools:sample/backgrounds/scenic" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvTitle"
+                    android:id="@+id/tvFavoriteTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -53,100 +54,100 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/courgette"
                     android:maxLines="2"
-                    android:text="@{result.title}"
+                    android:text="@{favoritesEntity.result.title}"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imgRecipe"
+                    app:layout_constraintStart_toEndOf="@+id/imgFavoriteRecipe"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Lorem Ipsum" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvDescription"
-                    parseHtml="@{result.summary}"
+                    android:id="@+id/tvFavoriteDescription"
+                    parseHtml="@{favoritesEntity.result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:textColor="@color/darkGray"
-                    app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-                    app:layout_constraintStart_toStartOf="@+id/tvTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                    app:layout_constraintEnd_toEndOf="@+id/tvFavoriteTitle"
+                    app:layout_constraintStart_toStartOf="@+id/tvFavoriteTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFavoriteTitle"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgHeart"
+                    android:id="@+id/imgFavoriteHeart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/tvDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+                    app:layout_constraintStart_toStartOf="@+id/tvFavoriteDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFavoriteDescription"
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/baseline_favorite_24"
                     app:tint="@color/red" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvHeart"
-                    setNumberOfLikes="@{result.aggregateLikes}"
+                    android:id="@+id/tvFavoriteHeart"
+                    setNumberOfLikes="@{favoritesEntity.result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/red"
-                    app:layout_constraintEnd_toEndOf="@+id/imgHeart"
-                    app:layout_constraintStart_toStartOf="@+id/imgHeart"
-                    app:layout_constraintTop_toBottomOf="@+id/imgHeart"
+                    app:layout_constraintEnd_toEndOf="@+id/imgFavoriteHeart"
+                    app:layout_constraintStart_toStartOf="@+id/imgFavoriteHeart"
+                    app:layout_constraintTop_toBottomOf="@+id/imgFavoriteHeart"
                     tools:text="100" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgClock"
+                    android:id="@+id/imgFavoriteClock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    app:layout_constraintStart_toEndOf="@+id/imgHeart"
-                    app:layout_constraintTop_toTopOf="@+id/imgHeart"
+                    app:layout_constraintStart_toEndOf="@+id/imgFavoriteHeart"
+                    app:layout_constraintTop_toTopOf="@+id/imgFavoriteHeart"
                     app:srcCompat="@drawable/baseline_access_time_24"
                     app:tint="@color/yellow" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvClock"
-                    setNumberOfMinutes="@{result.readyInMinutes}"
+                    android:id="@+id/tvFavoriteClock"
+                    setNumberOfMinutes="@{favoritesEntity.result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
-                    app:layout_constraintEnd_toEndOf="@+id/imgClock"
-                    app:layout_constraintStart_toStartOf="@+id/imgClock"
-                    app:layout_constraintTop_toBottomOf="@+id/imgClock"
+                    app:layout_constraintEnd_toEndOf="@+id/imgFavoriteClock"
+                    app:layout_constraintStart_toStartOf="@+id/imgFavoriteClock"
+                    app:layout_constraintTop_toBottomOf="@+id/imgFavoriteClock"
                     tools:text="100" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgLeaf"
-                    applyVeganColor="@{result.vegan}"
+                    android:id="@+id/imgFavoriteLeaf"
+                    applyVeganColor="@{favoritesEntity.result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:tint="@color/darkGray"
-                    app:layout_constraintStart_toEndOf="@+id/tvClock"
-                    app:layout_constraintTop_toTopOf="@+id/imgClock"
+                    app:layout_constraintStart_toEndOf="@+id/tvFavoriteClock"
+                    app:layout_constraintTop_toTopOf="@+id/imgFavoriteClock"
                     app:srcCompat="@drawable/baseline_eco_24" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvLeaf"
-                    applyVeganColor="@{result.vegan}"
+                    android:id="@+id/tvFavoriteLeaf"
+                    applyVeganColor="@{favoritesEntity.result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_vegan"
                     android:textAlignment="center"
                     android:textColor="@color/darkGray"
-                    app:layout_constraintEnd_toEndOf="@+id/imgLeaf"
-                    app:layout_constraintStart_toStartOf="@+id/imgLeaf"
-                    app:layout_constraintTop_toBottomOf="@+id/imgLeaf" />
+                    app:layout_constraintEnd_toEndOf="@+id/imgFavoriteLeaf"
+                    app:layout_constraintStart_toStartOf="@+id/imgFavoriteLeaf"
+                    app:layout_constraintTop_toBottomOf="@+id/imgFavoriteLeaf" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
