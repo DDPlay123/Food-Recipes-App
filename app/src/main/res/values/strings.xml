@@ -20,6 +20,11 @@
     <string name="text_apply">Apply</string>
     <string name="text_search">Search</string>
     <string name="text_detail">Detail</string>
+    <string name="text_vegetarian">Vegetarian</string>
+    <string name="text_gluten_free">Gluten Free</string>
+    <string name="text_dairy_free">Dairy Free</string>
+    <string name="text_healthy">Healthy</string>
+    <string name="text_cheap">Cheap</string>
 
     <!--  Meal Type  -->
     <string name="chip_main_course">Main Course</string>
