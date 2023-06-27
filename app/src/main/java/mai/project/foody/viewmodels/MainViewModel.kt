@@ -28,7 +28,7 @@ class MainViewModel @Inject constructor(
 
     /** ROOM DATABASE */
     val readRecipes: LiveData<List<RecipesEntity>> =
-        repository.local.readRecipes().asLiveData() // 如果使用get()，UI會持續監聽不間斷。
+        repository.local.readRecipes().asLiveData()
 
     val readFavoriteRecipes: LiveData<List<FavoritesEntity>> =
         repository.local.readFavoriteRecipes().asLiveData()
