@@ -1,4 +1,4 @@
-package mai.project.foody.data.database
+package mai.project.foody.data.database.entites
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

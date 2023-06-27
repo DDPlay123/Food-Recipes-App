@@ -21,7 +21,7 @@ object DatabaseModule {
         context,
         RecipesDatabase::class.java,
         Constants.DATABASE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration().build() // 使用破壞性遷移
 
     @Provides
     fun provideDao(database: RecipesDatabase) =

@@ -2,7 +2,8 @@ package mai.project.foody.data
 
 import kotlinx.coroutines.flow.Flow
 import mai.project.foody.data.database.RecipesDao
-import mai.project.foody.data.database.RecipesEntity
+import mai.project.foody.data.database.entites.FavoritesEntity
+import mai.project.foody.data.database.entites.RecipesEntity
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
@@ -13,7 +14,23 @@ class LocalDataSource @Inject constructor(
         recipesDao.insertRecipes(recipesEntity)
     }
 
-    fun readDatabase(): Flow<List<RecipesEntity>> {
+    suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) {
+        recipesDao.insertFavoriteRecipe(favoritesEntity)
+    }
+
+    fun readRecipes(): Flow<List<RecipesEntity>> {
         return recipesDao.readRecipes()
+    }
+
+    fun readFavoriteRecipes(): Flow<List<FavoritesEntity>> {
+        return recipesDao.readFavoriteRecipes()
+    }
+
+    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) {
+        recipesDao.deleteFavoriteRecipe(favoritesEntity)
+    }
+
+    suspend fun deleteAllFavoriteRecipes() {
+        recipesDao.deleteAllFavoriteRecipes()
     }
 }

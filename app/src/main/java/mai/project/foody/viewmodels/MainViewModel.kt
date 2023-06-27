@@ -13,7 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mai.project.foody.R
 import mai.project.foody.data.Repository
-import mai.project.foody.data.database.RecipesEntity
+import mai.project.foody.data.database.entites.FavoritesEntity
+import mai.project.foody.data.database.entites.RecipesEntity
 import mai.project.foody.util.NetworkResult
 import mai.project.foody.models.FoodRecipe
 import retrofit2.Response
@@ -27,11 +28,29 @@ class MainViewModel @Inject constructor(
 
     /** ROOM DATABASE */
     val readRecipes: LiveData<List<RecipesEntity>> =
-        repository.local.readDatabase().asLiveData() // 如果使用get()，UI會持續監聽不間斷。
+        repository.local.readRecipes().asLiveData() // 如果使用get()，UI會持續監聽不間斷。
+
+    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> =
+        repository.local.readFavoriteRecipes().asLiveData()
 
     private fun insertRecipes(recipesEntity: RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
+        }
+
+    private fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertFavoriteRecipes(favoritesEntity)
+        }
+
+    private fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteFavoriteRecipe(favoritesEntity)
+        }
+
+    private fun deleteAllFavoriteRecipes() =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteAllFavoriteRecipes()
         }
 
     /** RETROFIT */
