@@ -11,10 +11,12 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/lightGray"
+        app:layoutDescription="@xml/fragment_overview_scene"
         tools:context=".ui.fragments.overview.OverviewFragment">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -252,6 +254,7 @@
             app:layout_constraintTop_toTopOf="@+id/imgCheap" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="12dp"
@@ -280,6 +283,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>
