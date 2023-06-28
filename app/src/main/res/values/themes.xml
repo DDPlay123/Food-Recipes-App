@@ -12,6 +12,12 @@
 
     <style name="Theme.FoodRecipesApp" parent="Base.Theme.FoodRecipesApp" />
 
+    <style name="SplashScreenStyle" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="DetailsActivityStyle" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
