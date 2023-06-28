@@ -32,6 +32,7 @@
     <string name="text_healthy">Healthy</string>
     <string name="text_cheap">Cheap</string>
     <string name="text_okay">Okay</string>
+    <string name="text_error">Error</string>
 
     <!--  Meal Type  -->
     <string name="chip_main_course">Main Course</string>
@@ -65,5 +66,7 @@
 
     <string name="number_item_selected">%d item selected</string>
     <string name="number_recipes_removed">%d Recipe/s removed</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
 
 </resources>
