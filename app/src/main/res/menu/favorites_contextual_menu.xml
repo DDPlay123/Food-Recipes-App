@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/menu_save_to_favorites"
-        android:icon="@drawable/baseline_star_24"
+        android:id="@+id/menu_delete_favorite_recipe"
+        android:icon="@drawable/baseline_delete_24"
         android:iconTint="@color/colorPrimary"
-        android:title="@string/hint_save_to_favorites"
+        android:title="@string/hint_delete_favorite_recipe"
         app:showAsAction="ifRoom"
         tools:targetApi="o" />
 

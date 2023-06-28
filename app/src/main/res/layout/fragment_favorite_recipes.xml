@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="mainViewModel"
+            type="mai.project.foody.viewmodels.MainViewModel" />
+
+        <variable
+            name="mAdapter"
+            type="mai.project.foody.adapters.FavoriteRecipesAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,27 +20,10 @@
         android:background="@color/lightGray"
         tools:context=".ui.fragments.favorites.FavoriteRecipesFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolBar"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:elevation="4dp"
-                app:title="@string/title_favorite_recipes"
-                app:titleTextColor="@color/colorPrimary" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavoriteRecipes"
+            setData="@{mAdapter}"
+            setVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -41,10 +31,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgNoData"
+            setVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:alpha="0.5"
@@ -58,6 +49,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvNoData"
+            setVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

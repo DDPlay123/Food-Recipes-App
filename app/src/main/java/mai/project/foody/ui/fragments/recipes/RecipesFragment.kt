@@ -6,7 +6,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -54,8 +53,6 @@ class RecipesFragment :
     override fun FragmentRecipesBinding.initialize() {
         binding.mainViewModel = this@RecipesFragment.mainViewModel
 
-        // Set the Toolbar as the ActionBar
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolBar)
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

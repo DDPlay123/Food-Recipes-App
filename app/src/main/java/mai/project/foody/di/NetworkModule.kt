@@ -11,11 +11,13 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
@@ -25,11 +27,13 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
+    @Singleton
     @Provides
     fun provideRetrofitInstance(
         okHttpClient: OkHttpClient,
@@ -42,6 +46,7 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit): FoodRecipesAPI {
         return retrofit.create(FoodRecipesAPI::class.java)

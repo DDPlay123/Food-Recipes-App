@@ -13,16 +13,7 @@
         android:background="@color/lightGray"
         tools:context=".ui.fragments.foodjoke.FoodJokeFragment">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
-            android:layout_width="match_parent"
-            android:elevation="4dp"
-            app:title="@string/title_food_joke"
-            app:titleTextColor="@color/black"
-            android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
