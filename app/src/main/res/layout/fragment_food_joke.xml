@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="mainViewModel"
+            type="mai.project.foody.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +18,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardFoodJoke"
+            readApiResponse3="@{mainViewModel.foodJokeResponse}"
+            readDatabase3="@{mainViewModel.readFoodJoke}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -32,7 +37,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv"
+                    android:id="@+id/tvFoodJoke"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="16sp"
@@ -52,6 +57,7 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
+            readApiResponse3="@{mainViewModel.foodJokeResponse}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -62,6 +68,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgFoodJokeError"
+            readApiResponse4="@{mainViewModel.foodJokeResponse}"
+            readDatabase4="@{mainViewModel.readFoodJoke}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:alpha="0.5"
@@ -75,6 +83,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvFoodJokeError"
+            readApiResponse4="@{mainViewModel.foodJokeResponse}"
+            readDatabase4="@{mainViewModel.readFoodJoke}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

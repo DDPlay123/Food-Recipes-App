@@ -33,6 +33,7 @@
     <string name="text_cheap">Cheap</string>
     <string name="text_okay">Okay</string>
     <string name="text_error">Error</string>
+    <string name="text_share">Share</string>
 
     <!--  Meal Type  -->
     <string name="chip_main_course">Main Course</string>
