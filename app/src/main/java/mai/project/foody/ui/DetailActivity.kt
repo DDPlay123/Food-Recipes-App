@@ -145,7 +145,7 @@ class DetailActivity : AppCompatActivity() {
     private fun removeFromFavorites(item: MenuItem) {
         val favoritesEntity = FavoritesEntity(savedRecipeId, args.result)
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
-        changeMenuItemColor(item, R.color.colorPrimary)
+        changeMenuItemColor(item, R.color.white)
         binding.root.showSnackBar(getString(R.string.hint_removed_from_favorites))
         recipeSaved = false
     }

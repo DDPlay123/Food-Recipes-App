@@ -15,7 +15,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightGray"
+        android:background="@color/backgroundColor"
         app:layoutDescription="@xml/fragment_overview_scene"
         tools:context=".ui.fragments.overview.OverviewFragment">
 
@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <View
             android:id="@+id/gradient_overlay"
@@ -106,6 +106,7 @@
             android:layout_marginEnd="12dp"
             android:fontFamily="@font/courgette"
             android:text="@{result.title}"
+            android:textColor="@color/titleColor"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:tint="@color/darkGray"
+            android:tint="@color/itemColor"
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             app:srcCompat="@drawable/baseline_check_circle_24" />
@@ -131,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/text_vegetarian"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/itemColor"
             app:layout_constraintBottom_toBottomOf="@+id/imgVegetarian"
             app:layout_constraintStart_toEndOf="@+id/imgVegetarian"
             app:layout_constraintTop_toTopOf="@+id/imgVegetarian" />
@@ -142,10 +143,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:tint="@color/darkGray"
             app:layout_constraintStart_toStartOf="@+id/imgVegetarian"
             app:layout_constraintTop_toBottomOf="@+id/imgVegetarian"
-            app:srcCompat="@drawable/baseline_check_circle_24" />
+            app:srcCompat="@drawable/baseline_check_circle_24"
+            app:tint="@color/itemColor" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvVegan"
@@ -154,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/text_vegan"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/itemColor"
             app:layout_constraintBottom_toBottomOf="@+id/imgVegan"
             app:layout_constraintStart_toEndOf="@+id/imgVegan"
             app:layout_constraintTop_toTopOf="@+id/imgVegan" />
@@ -169,7 +170,7 @@
             app:layout_constraintStart_toEndOf="@+id/tvVegetarian"
             app:layout_constraintTop_toTopOf="@+id/tvVegetarian"
             app:srcCompat="@drawable/baseline_check_circle_24"
-            app:tint="@color/darkGray" />
+            app:tint="@color/itemColor" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvGlutenFree"
@@ -178,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/text_gluten_free"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/itemColor"
             app:layout_constraintBottom_toBottomOf="@+id/imgGlutenFree"
             app:layout_constraintStart_toEndOf="@+id/imgGlutenFree"
             app:layout_constraintTop_toTopOf="@+id/imgGlutenFree" />
@@ -192,7 +193,7 @@
             app:layout_constraintStart_toStartOf="@+id/imgGlutenFree"
             app:layout_constraintTop_toBottomOf="@+id/imgGlutenFree"
             app:srcCompat="@drawable/baseline_check_circle_24"
-            app:tint="@color/darkGray" />
+            app:tint="@color/itemColor" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDairyFree"
@@ -201,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/text_dairy_free"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/itemColor"
             app:layout_constraintBottom_toBottomOf="@+id/imgDairyFree"
             app:layout_constraintStart_toEndOf="@+id/imgDairyFree"
             app:layout_constraintTop_toTopOf="@+id/imgDairyFree" />
@@ -216,7 +217,7 @@
             app:layout_constraintStart_toEndOf="@+id/tvGlutenFree"
             app:layout_constraintTop_toTopOf="@+id/tvGlutenFree"
             app:srcCompat="@drawable/baseline_check_circle_24"
-            app:tint="@color/darkGray" />
+            app:tint="@color/itemColor" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvHealthy"
@@ -225,7 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/text_healthy"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/itemColor"
             app:layout_constraintBottom_toBottomOf="@+id/imgHealthy"
             app:layout_constraintStart_toEndOf="@+id/imgHealthy"
             app:layout_constraintTop_toTopOf="@+id/imgHealthy" />
@@ -239,7 +240,7 @@
             app:layout_constraintStart_toStartOf="@+id/imgHealthy"
             app:layout_constraintTop_toBottomOf="@+id/imgHealthy"
             app:srcCompat="@drawable/baseline_check_circle_24"
-            app:tint="@color/darkGray" />
+            app:tint="@color/itemColor" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvCheap"
@@ -248,7 +249,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/text_cheap"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/itemColor"
             app:layout_constraintBottom_toBottomOf="@+id/imgCheap"
             app:layout_constraintStart_toEndOf="@+id/imgCheap"
             app:layout_constraintTop_toTopOf="@+id/imgCheap" />
