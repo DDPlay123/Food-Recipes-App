@@ -58,22 +58,22 @@ class RecipesBottomSheet : BaseBottomSheetDialogFragment<RecipesBottomSheetBindi
 
     private fun setListener() {
         binding.apply {
-            chipGroupMealType.setOnCheckedStateChangeListener { group, _ ->
-                val chip = group.findViewById<Chip>(group.checkedChipId)
+            chipGroupMealType.setOnCheckedStateChangeListener { group, selectedChipId ->
+                val chip = group.findViewById<Chip>(selectedChipId.first())
                 val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
                 mealTypeChip = selectedMealType
-                mealTypeChipId = group.checkedChipId
+                mealTypeChipId = selectedChipId.first()
             }
 
-            chipGroupDietType.setOnCheckedStateChangeListener { group, _ ->
-                val chip = group.findViewById<Chip>(group.checkedChipId)
+            chipGroupDietType.setOnCheckedStateChangeListener { group, selectedChipId ->
+                val chip = group.findViewById<Chip>(selectedChipId.first())
                 val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
                 dietTypeChip = selectedMealType
-                dietTypeChipId = group.checkedChipId
+                dietTypeChipId = selectedChipId.first()
             }
 
             btnApply.setOnClickListener {
-                recipesViewModel.saveMealAndDietType(
+                recipesViewModel.saveMealAndDietTypeTemp(
                     mealTypeChip,
                     mealTypeChipId,
                     dietTypeChip,
@@ -89,7 +89,9 @@ class RecipesBottomSheet : BaseBottomSheetDialogFragment<RecipesBottomSheetBindi
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
         if (chipId != 0) {
             try {
-                chipGroup.findViewById<Chip>(chipId).isChecked = true
+                val targetView = chipGroup.findViewById<Chip>(chipId)
+                targetView.isChecked = true
+                chipGroup.requestChildFocus(targetView, targetView)
             } catch (e: Exception) {
                 e.printStackTrace()
                 Method.logE("RecipesBottomSheet", "updateChip", e)

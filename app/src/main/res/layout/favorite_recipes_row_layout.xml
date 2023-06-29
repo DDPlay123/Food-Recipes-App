@@ -94,9 +94,9 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvFavoriteHeart"
-                    setNumberOfLikes="@{favoritesEntity.result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(favoritesEntity.result.aggregateLikes)}"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     app:layout_constraintEnd_toEndOf="@+id/imgFavoriteHeart"
@@ -116,9 +116,9 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvFavoriteClock"
-                    setNumberOfMinutes="@{favoritesEntity.result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(favoritesEntity.result.readyInMinutes)}"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
                     app:layout_constraintEnd_toEndOf="@+id/imgFavoriteClock"

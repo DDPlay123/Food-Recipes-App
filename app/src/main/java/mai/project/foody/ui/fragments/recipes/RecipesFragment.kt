@@ -35,6 +35,7 @@ class RecipesFragment :
     BaseFragment<FragmentRecipesBinding>(R.layout.fragment_recipes),
     SearchView.OnQueryTextListener{
 
+    private var dataRequested = false
     private val args by navArgs<RecipesFragmentArgs>()
 
     private lateinit var mainViewModel: MainViewModel
@@ -48,6 +49,18 @@ class RecipesFragment :
         // Setup ViewModel
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.recyclerViewState?.let {
+            binding.rvRecipes.layoutManager?.onRestoreInstanceState(mainViewModel.recyclerViewState)
+        }
+    }
+
+    override fun FragmentRecipesBinding.destroy() {
+        this@RecipesFragment.mainViewModel.recyclerViewState =
+            binding.rvRecipes.layoutManager?.onSaveInstanceState()
     }
 
     override fun FragmentRecipesBinding.initialize() {
@@ -82,7 +95,7 @@ class RecipesFragment :
     }
 
     private fun searchAPIData(searchQuery: String) {
-        binding.rvShimmer.showShimmer()
+        showShimmerEffect()
         mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
     }
 
@@ -110,10 +123,10 @@ class RecipesFragment :
     }
 
     private fun setupRecyclerView() {
-        binding.rvShimmer.apply {
+        binding.rvRecipes.apply {
             adapter = recipesAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            showShimmer()
+            showShimmerEffect()
         }
     }
 
@@ -124,12 +137,15 @@ class RecipesFragment :
                 launch {
                     // 這裡用 observeOnce() 是要避免呼叫API後，畫面重整時，又重新讀取資料庫的資料
                     mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                        if (database.isNotEmpty() && !args.backFromBottomSheet) {
+                        if (database.isNotEmpty() && !args.backFromBottomSheet || database.isNotEmpty() && dataRequested) {
                             Method.logE("RecipesFragment", "readDatabase called.")
                             recipesAdapter.setData(database[0].foodRecipe)
-                            binding.rvShimmer.hideShimmer()
+                            hideShimmerEffect()
                         } else {
-                            requestAPIData()
+                            if (!dataRequested) {
+                                requestAPIData()
+                                dataRequested = true
+                            }
                         }
                     }
                 }
@@ -138,18 +154,18 @@ class RecipesFragment :
                     mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner) { response ->
                         when (response) {
                             is NetworkResult.Success -> {
-                                binding.rvShimmer.hideShimmer()
+                                hideShimmerEffect()
                                 response.data?.let { recipesAdapter.setData(it) }
                             }
 
                             is NetworkResult.Error -> {
-                                binding.rvShimmer.hideShimmer()
+                                hideShimmerEffect()
                                 loadDataFromCache()
                                 Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                             }
 
                             is NetworkResult.Loading -> {
-                                binding.rvShimmer.showShimmer()
+                                showShimmerEffect()
                             }
 
                             else -> Unit
@@ -181,18 +197,19 @@ class RecipesFragment :
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
-                    binding.rvShimmer.hideShimmer()
+                    hideShimmerEffect()
                     response.data?.let { recipesAdapter.setData(it) }
+                    recipesViewModel.saveMealAndDietType()
                 }
 
                 is NetworkResult.Error -> {
-                    binding.rvShimmer.hideShimmer()
+                    hideShimmerEffect()
                     loadDataFromCache()
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                 }
 
                 is NetworkResult.Loading -> {
-                    binding.rvShimmer.showShimmer()
+                    showShimmerEffect()
                 }
 
                 else -> Unit
@@ -206,6 +223,20 @@ class RecipesFragment :
                 Method.logE("RecipesFragment", "loadDataFromCache called.")
                 recipesAdapter.setData(database[0].foodRecipe)
             }
+        }
+    }
+
+    private fun showShimmerEffect() {
+        binding.apply {
+            shimmerFrameLayout.startShimmer()
+            rvRecipes.visibility = View.GONE
+        }
+    }
+
+    private fun hideShimmerEffect() {
+        binding.apply {
+            shimmerFrameLayout.stopShimmer()
+            rvRecipes.visibility = View.VISIBLE
         }
     }
 }

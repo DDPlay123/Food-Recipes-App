@@ -14,7 +14,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
@@ -25,7 +25,6 @@ import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_DIE
 import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_DIET_TYPE_ID
 import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_MEAL_TYPE
 import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_MEAL_TYPE_ID
-import mai.project.foody.data.DataStoreRepository.PreferenceKeys.Preferences_NAME
 import mai.project.foody.util.Constants.Companion.DEFAULT_DIET_TYPE
 import mai.project.foody.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import mai.project.foody.util.Method
@@ -39,25 +38,24 @@ data class MealAndDietType(
     val selectedDietTypeId: Int
 )
 
-@ActivityRetainedScoped
+// Build DataStore
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+    name = "FOODY_PREFERENCES",
+    produceMigrations = { context ->
+        listOf(SharedPreferencesMigration(context, "FOODY_PREFERENCES"))
+    })
+
+@ViewModelScoped
 class DataStoreRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     private object PreferenceKeys {
-        const val Preferences_NAME = "FOODY_PREFERENCES"
         const val Preferences_MEAL_TYPE = "mealType"
         const val Preferences_MEAL_TYPE_ID = "mealTypeId"
         const val Preferences_DIET_TYPE = "dietType"
         const val Preferences_DIET_TYPE_ID = "dietTypeId"
         const val Preferences_BackOnline = "backOnline"
     }
-
-    // Build DataStore
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-        name = Preferences_NAME,
-        produceMigrations = { context ->
-            listOf(SharedPreferencesMigration(context, Preferences_NAME))
-        })
 
     // DataStore Point
     private val dataStore = context.dataStore

@@ -3,6 +3,7 @@ package mai.project.foody.viewmodels
 import android.app.Application
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Parcelable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -27,6 +28,8 @@ class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
 ): AndroidViewModel(application) {
+
+    var recyclerViewState: Parcelable? = null
 
     /** ROOM DATABASE */
     val readRecipes: LiveData<List<RecipesEntity>> =

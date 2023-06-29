@@ -101,9 +101,8 @@ dependencies {
     // Gson
     implementation("com.google.code.gson:gson:2.9.0")
 
-    // Shimmer (https://github.com/omtodkar/ShimmerRecyclerView)
+    // Shimmer (https://github.com/facebook/shimmer-android)
     implementation("com.facebook.shimmer:shimmer:0.5.0")
-    implementation("com.todkars:shimmer-recyclerview:0.4.1")
 
     // Jsoup
     implementation("org.jsoup:jsoup:1.14.3")

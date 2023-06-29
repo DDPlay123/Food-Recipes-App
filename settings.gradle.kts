@@ -12,8 +12,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://jitpack.io")
-        //noinspection JcenterRepositoryObsolete
-        jcenter()
     }
 }
 

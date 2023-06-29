@@ -9,14 +9,14 @@
         android:id="@+id/recipesFragment"
         android:name="mai.project.foody.ui.fragments.recipes.RecipesFragment"
         android:label="Recipes"
-        tools:layout="@layout/fragment_recipes" >
+        tools:layout="@layout/fragment_recipes">
         <action
             android:id="@+id/action_recipesFragment_to_recipesBottomSheet"
             app:destination="@id/recipesBottomSheet" />
         <argument
             android:name="backFromBottomSheet"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_recipesFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
@@ -25,7 +25,7 @@
         android:id="@+id/favoriteRecipesFragment"
         android:name="mai.project.foody.ui.fragments.favorites.FavoriteRecipesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorite_recipes" >
+        tools:layout="@layout/fragment_favorite_recipes">
         <action
             android:id="@+id/action_favoriteRecipesFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
@@ -42,7 +42,9 @@
         tools:layout="@layout/recipes_bottom_sheet">
         <action
             android:id="@+id/action_recipesBottomSheet_to_recipesFragment"
-            app:destination="@id/recipesFragment" />
+            app:destination="@id/recipesFragment"
+            app:popUpTo="@id/recipesFragment"
+            app:popUpToInclusive="true" />
     </dialog>
     <activity
         android:id="@+id/detailActivity"

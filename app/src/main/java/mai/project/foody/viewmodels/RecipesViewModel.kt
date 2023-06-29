@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mai.project.foody.data.DataStoreRepository
+import mai.project.foody.data.MealAndDietType
 import mai.project.foody.util.Constants
 import javax.inject.Inject
 
@@ -17,8 +18,7 @@ class RecipesViewModel @Inject constructor(
     application: Application
 ): AndroidViewModel(application) {
 
-    private var mealType = Constants.DEFAULT_MEAL_TYPE
-    private var dietType = Constants.DEFAULT_DIET_TYPE
+    private lateinit var mealAndDiet: MealAndDietType
 
     var networkStatus = false
     var backOnline = false
@@ -26,12 +26,23 @@ class RecipesViewModel @Inject constructor(
     val readMealAndDietType = dataStoreRepository.readMealAndDietType
     val readBackOnline = dataStoreRepository.readBackOnline
 
-    fun saveMealAndDietType(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) =
+    fun saveMealAndDietType() =
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveMealAndDietType(mealType, mealTypeId, dietType, dietTypeId)
+            if (this@RecipesViewModel::mealAndDiet.isInitialized) {
+                dataStoreRepository.saveMealAndDietType(
+                    mealAndDiet.selectedMealType,
+                    mealAndDiet.selectedMealTypeId,
+                    mealAndDiet.selectedDietType,
+                    mealAndDiet.selectedDietTypeId
+                )
+            }
         }
 
-    fun saveBackOnline(backOnline: Boolean) =
+    fun saveMealAndDietTypeTemp(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) {
+        mealAndDiet = MealAndDietType(mealType, mealTypeId, dietType, dietTypeId)
+    }
+
+    private fun saveBackOnline(backOnline: Boolean) =
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreRepository.saveBackOnline(backOnline)
         }
@@ -39,17 +50,10 @@ class RecipesViewModel @Inject constructor(
     fun applyQueries(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
 
-        viewModelScope.launch {
-            readMealAndDietType.collect { value ->
-                mealType = value.selectedMealType
-                dietType = value.selectedDietType
-            }
-        }
-
         queries[Constants.QUERY_NUMBER] = Constants.DEFAULT_RECIPES_NUMBER
         queries[Constants.QUERY_API_KEY] = Constants.API_KEY
-        queries[Constants.QUERY_TYPE] = mealType
-        queries[Constants.QUERY_DIET] = dietType
+        queries[Constants.QUERY_TYPE] = mealAndDiet.selectedMealType
+        queries[Constants.QUERY_DIET] = mealAndDiet.selectedDietType
         queries[Constants.QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[Constants.QUERY_FILL_INGREDIENTS] = "true"
 
