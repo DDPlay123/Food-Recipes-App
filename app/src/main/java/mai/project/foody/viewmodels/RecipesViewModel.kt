@@ -52,10 +52,16 @@ class RecipesViewModel @Inject constructor(
 
         queries[Constants.QUERY_NUMBER] = Constants.DEFAULT_RECIPES_NUMBER
         queries[Constants.QUERY_API_KEY] = Constants.API_KEY
-        queries[Constants.QUERY_TYPE] = mealAndDiet.selectedMealType
-        queries[Constants.QUERY_DIET] = mealAndDiet.selectedDietType
         queries[Constants.QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[Constants.QUERY_FILL_INGREDIENTS] = "true"
+
+        if (this@RecipesViewModel::mealAndDiet.isInitialized) {
+            queries[Constants.QUERY_TYPE] = mealAndDiet.selectedMealType
+            queries[Constants.QUERY_DIET] = mealAndDiet.selectedDietType
+        } else {
+            queries[Constants.QUERY_TYPE] = Constants.DEFAULT_MEAL_TYPE
+            queries[Constants.QUERY_DIET] = Constants.DEFAULT_DIET_TYPE
+        }
 
         return queries
     }
